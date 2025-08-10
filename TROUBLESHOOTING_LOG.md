@@ -25,13 +25,23 @@ This document tracks all troubleshooting steps, failed attempts, and intermediat
    ```
    - Appeared to start but files still not accessible
 
-#### Working Solution
+#### Working Solution - GitHub Integration
 ```powershell
-swa deploy --app-location . --deployment-token "TOKEN"
+# Refresh PATH
+$env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("PATH", "User")
+
+# Create Static Web App with GitHub integration
+az staticwebapp create --name "software-showroom-new" --resource-group "rg-software-showroom" --location "East US 2" --source "https://github.com/Sameer-Mhaisekar/the-software-showroom" --branch "main" --app-location "/" --login-with-github
 ```
-- Using explicit `--app-location` parameter
-- Deploying to preview environment (default)
-- Should properly upload all static files
+
+**GitHub Device Authentication Process:**
+1. Command displays: `Please navigate to https://github.com/login/device and enter the user code DEEB-056B`
+2. User goes to https://github.com/login/device
+3. Enters device code (e.g., `DEEB-056B`)
+4. Authorizes Azure CLI access
+5. Deployment completes automatically
+
+**✅ SUCCESS:** Website deployed to `https://orange-bush-05fb1170f.1.azurestaticapps.net`
 
 #### Verification Commands
 ```powershell

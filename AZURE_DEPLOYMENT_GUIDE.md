@@ -13,9 +13,29 @@ This guide documents the complete process of deploying The Software Showroom to 
 - Azure AD B2C (Free tier)
 - Estimated cost: ~$5-10/month
 
-## Phase 1: Foundation & Hosting
+## Deployment Summary
 
-### Task 1: Set up Azure Static Web Apps
+**Session Date:** August 10, 2025  
+**Status:** Phase 1 Complete - Paused before Phase 2
+
+**Azure Subscription Used:**
+- **Subscription:** Visual Studio Enterprise Subscription
+- **Subscription ID:** 9bcc24d9-6812-49e0-a171-3532565f7259
+- **Tenant:** Default Directory (16489e77-76ab-4228-ae10-372ede62ddbd)
+
+**Resources Created:**
+- **Resource Group:** `rg-software-showroom` (East US)
+- **Static Web App:** `software-showroom-new` (East US 2)
+- **GitHub Repository:** https://github.com/Sameer-Mhaisekar/the-software-showroom
+- **Live Website:** https://orange-bush-05fb1170f.1.azurestaticapps.net
+
+**Current Costs:** $0/month (Free tier)
+
+---
+
+## Phase 1: Foundation & Hosting ✅ COMPLETE
+
+### Task 1: Set up Azure Static Web Apps ✅
 
 #### Prerequisites
 - Azure account (free tier available)
@@ -123,17 +143,75 @@ swa --version
 swa deploy . --deployment-token "YOUR_DEPLOYMENT_TOKEN"
 ```
 
-### Task 3: Verify Deployment
+### Task 3: GitHub Integration for Reliable Deployment
 
-Your website should now be live at the URL provided in the Static Web App creation output.
+The direct SWA CLI deployment showed "ready soon" indefinitely, so we're using GitHub integration for reliable automated deployment.
 
-**✅ Completed:** Basic Azure hosting setup
+#### Step 1: Create GitHub Repository
+
+1. Go to [GitHub.com](https://github.com) and sign in
+2. Click "New repository" (+ icon or green button)
+3. **Repository name:** `the-software-showroom`
+4. **Description:** `Azure-hosted vendor directory and software discovery platform`
+5. **Visibility:** Public (required for free Azure Static Web Apps)
+6. **DON'T** initialize with README, .gitignore, or license
+7. Click "Create repository"
+
+#### Step 2: Connect Local Repository to GitHub
+
+```powershell
+# Add GitHub as remote origin
+git remote add origin https://github.com/Sameer-Mhaisekar/the-software-showroom.git
+
+# Push code to GitHub
+git branch -M main
+git push -u origin main
+```
+
+#### Step 3: Connect Azure Static Web App to GitHub
+
+```powershell
+# Delete current static web app (to recreate with GitHub integration)
+az staticwebapp delete --name "software-showroom" --resource-group "rg-software-showroom" --yes
+
+# Refresh PATH and create new static web app with GitHub integration
+$env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("PATH", "User")
+
+az staticwebapp create --name "software-showroom-new" --resource-group "rg-software-showroom" --location "East US 2" --source "https://github.com/Sameer-Mhaisekar/the-software-showroom" --branch "main" --app-location "/" --login-with-github
+```
+
+**GitHub Device Authentication:**
+When prompted, the command will show:
+```
+Please navigate to https://github.com/login/device and enter the user code XXXX-XXXX
+```
+
+1. Go to `https://github.com/login/device`
+2. Enter the device code displayed in terminal (e.g., `DEEB-056B`)
+3. Click "Continue" and authorize Azure CLI
+
+#### Step 4: Verify Deployment
+
+**✅ SUCCESS:** Website is now live at: `https://orange-bush-05fb1170f.1.azurestaticapps.net`
+
+The new static web app has automatic deployment configured. Every push to the `main` branch will trigger a new deployment via GitHub Actions.
+
+**✅ Completed Phase 1: Foundation & Hosting**
+- Task 1: ✅ Set up Azure Static Web Apps
+- Task 2: ✅ Create Git repository and deploy to Azure  
+- Task 3: ✅ Verify basic hosting with GitHub integration
+
+**Current Status:**
+- Website URL: `https://orange-bush-05fb1170f.1.azurestaticapps.net`
+- GitHub Repository: `https://github.com/Sameer-Mhaisekar/the-software-showroom`
+- Auto-deployment: ✅ Configured via GitHub Actions
+- Hosting Cost: $0 (Free tier)
 
 ---
 
 ## Next Steps
 
-Following tasks will be documented as we complete them:
+**Phase 2: Database & Backend**
 - Phase 2: Database & Backend setup
 - Phase 3: Authentication implementation
 - Phase 4: Vendor portal development
