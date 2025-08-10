@@ -1,0 +1,12 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "software-showroom": {
+      "appLocation": "./",
+      "outputLocation": "./",
+      "apiLocation": "",
+      "appName": "software-showroom",
+      "resourceGroup": "rg-software-showroom"
+    }
+  }
+}
