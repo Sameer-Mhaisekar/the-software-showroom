@@ -2904,3 +2904,88 @@ body .section-subtitle {
 }
 
 /* === End Toggle Switch Styles ======================================== */
+
+/* === Use Case Tab Styles ============================================== */
+.use-case-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+    background: #f8fafc;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+.use-case-tab {
+    flex: 1;
+    padding: 1rem 2rem;
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    position: relative;
+}
+
+.use-case-tab:hover {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.use-case-tab.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.use-case-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Dark mode overrides for tabs */
+@media (prefers-color-scheme: dark) {
+    .use-case-tabs {
+        background: var(--pg-bg-surface, #1e293b);
+        border-bottom-color: var(--pg-border, #334155);
+    }
+    
+    .use-case-tab {
+        background: var(--pg-bg-elevated, #0f172a);
+        color: var(--pg-text-secondary, #94a3b8);
+    }
+    
+    .use-case-tab:hover {
+        background: var(--pg-bg-hover, #1e293b);
+        color: var(--pg-text-primary, #f1f5f9);
+    }
+}
+
+/* === End Use Case Tab Styles ========================================== */

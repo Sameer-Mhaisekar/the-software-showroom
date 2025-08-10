@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize mini-carousels
     initializeMiniCarousels();
     
-    // Initialize use case toggle
-    initializeUseCaseToggle();
+    // Initialize use case tabs
+    initializeUseCaseTabs();
 
     // Demo tab functionality
     const demoTabs = document.querySelectorAll('.demo-tab');
@@ -1210,98 +1210,49 @@ window.openComparison = openComparison;
 window.showUseCaseOverlay = showUseCaseOverlay;
 window.closeUseCaseOverlay = closeUseCaseOverlay;
 
-// Use Case Toggle Functionality
-function initializeUseCaseToggle() {
-    const toggleInput = document.getElementById('use-case-toggle');
-    const toggleLabels = document.querySelectorAll('.toggle-label');
-    const technicalSection = document.getElementById('technical-use-cases');
-    const businessSection = document.getElementById('business-use-cases');
+// === Use Case Tab Functionality ===
+
+function initializeUseCaseTabs() {
+    const tabs = document.querySelectorAll('.use-case-tab');
+    const contents = document.querySelectorAll('.tab-content');
     
-    if (!toggleInput || !technicalSection || !businessSection) {
-        return; // Elements not found, skip initialization
-    }
-    
-    // Toggle label click handlers
-    toggleLabels.forEach(label => {
-        label.addEventListener('click', function() {
-            const target = this.getAttribute('data-target');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
             
-            if (target === 'technical' && toggleInput.checked) {
-                // Switch to technical
-                toggleInput.checked = false;
-                switchToTechnical();
-            } else if (target === 'business' && !toggleInput.checked) {
-                // Switch to business
-                toggleInput.checked = true;
-                switchToBusiness();
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // Show corresponding content
+            const targetContent = document.getElementById(`${targetTab}-content`);
+            if (targetContent) {
+                targetContent.classList.add('active');
             }
+            
+            // Update URL hash for bookmarking
+            window.location.hash = `use-cases-${targetTab}`;
         });
     });
     
-    // Toggle switch change handler
-    toggleInput.addEventListener('change', function() {
-        if (this.checked) {
-            switchToBusiness();
-        } else {
-            switchToTechnical();
+    // Handle initial load and URL hash
+    const hash = window.location.hash;
+    if (hash === '#use-cases-business') {
+        // Switch to business tab if hash indicates it
+        const businessTab = document.querySelector('[data-tab="business"]');
+        const businessContent = document.getElementById('business-content');
+        const technicalTab = document.querySelector('[data-tab="technical"]');
+        const technicalContent = document.getElementById('technical-content');
+        
+        if (businessTab && businessContent && technicalTab && technicalContent) {
+            technicalTab.classList.remove('active');
+            technicalContent.classList.remove('active');
+            businessTab.classList.add('active');
+            businessContent.classList.add('active');
         }
-    });
-    
-    function switchToTechnical() {
-        // Update labels
-        toggleLabels.forEach(label => {
-            if (label.getAttribute('data-target') === 'technical') {
-                label.classList.add('active');
-            } else {
-                label.classList.remove('active');
-            }
-        });
-        
-        // Switch sections with animation
-        businessSection.classList.add('fade-out');
-        setTimeout(() => {
-            businessSection.classList.add('hidden');
-            businessSection.classList.remove('fade-out');
-            
-            technicalSection.classList.remove('hidden');
-            technicalSection.classList.add('fade-in');
-            
-            setTimeout(() => {
-                technicalSection.classList.remove('fade-in');
-            }, 400);
-        }, 200);
-        
-        // Update URL hash
-        history.replaceState(null, null, '#use-cases');
     }
-    
-    function switchToBusiness() {
-        // Update labels
-        toggleLabels.forEach(label => {
-            if (label.getAttribute('data-target') === 'business') {
-                label.classList.add('active');
-            } else {
-                label.classList.remove('active');
-            }
-        });
-        
-        // Switch sections with animation
-        technicalSection.classList.add('fade-out');
-        setTimeout(() => {
-            technicalSection.classList.add('hidden');
-            technicalSection.classList.remove('fade-out');
-            
-            businessSection.classList.remove('hidden');
-            businessSection.classList.add('fade-in');
-            
-            setTimeout(() => {
-                businessSection.classList.remove('fade-in');
-            }, 400);
-        }, 200);
-        
-        // Update URL hash
-        history.replaceState(null, null, '#business-use-cases');
-    }
+    // Technical tab is active by default (already has active class in HTML)
 }
-window.showUseCaseOverlay = showUseCaseOverlay;
-window.closeUseCaseOverlay = closeUseCaseOverlay;
