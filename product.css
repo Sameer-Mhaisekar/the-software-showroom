@@ -2797,3 +2797,110 @@ body .section-subtitle {
 /* Adaptive Typography */
 @media (max-width:640px){.product-meta h1{font-size:2rem}.use-cases-grid{grid-template-columns:1fr}.use-case-panel{padding:1.5rem;}}
 
+
+
+/* === Toggle Switch for Use Cases ===================================== */
+.use-case-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--pg-bg-surface);
+    border-radius: 20px;
+    border: 1px solid var(--pg-border-glass);
+}
+
+.toggle-labels {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.toggle-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--pg-text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    user-select: none;
+}
+
+.toggle-label.active {
+    color: var(--pg-text-primary);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 30px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+}
+
+.toggle-button {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    left: 3px;
+}
+
+.toggle-input:checked + .toggle-slider .toggle-button {
+    transform: translateX(30px);
+}
+
+.toggle-input:checked + .toggle-slider {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Hidden state for use case dashboards */
+.use-cases-dashboard.hidden {
+    display: none !important;
+}
+
+/* Smooth transition for switching */
+.use-cases-dashboard {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.use-cases-dashboard.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.use-cases-dashboard.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === End Toggle Switch Styles ======================================== */

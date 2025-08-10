@@ -135,14 +135,28 @@
         </div>
     </section>
 
-    <!-- Use Cases Section -->
+    <!-- Use Cases Section with Toggle -->
     <section id="use-cases" class="use-cases-section section-animate delay-2">
         <div class="container">
-            <h2>Use Case Deep Dive</h2>
-            <p class="section-subtitle" style="color: #000000 !important;">Interactive analysis dashboard - explore detailed performance insights for key business scenarios</p>
+            <h2>Use Case Deep Dives</h2>
+            <p class="section-subtitle">Interactive analysis dashboard - explore detailed performance insights for key scenarios</p>
             
-            <div class="use-cases-dashboard">
-                <!-- Use Case Cards in Flexible Grid -->
+            <!-- Toggle Switch -->
+            <div class="use-case-toggle-container">
+                <div class="toggle-labels">
+                    <span class="toggle-label active" data-target="technical">Technical Use Cases</span>
+                    <span class="toggle-label" data-target="business">Business Use Cases</span>
+                </div>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="use-case-toggle" class="toggle-input">
+                    <label for="use-case-toggle" class="toggle-slider">
+                        <span class="toggle-button"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Technical Use Cases (Default Active) -->
+            <div class="use-cases-dashboard" id="technical-use-cases" data-category="technical">
                 <div class="use-cases-grid">
                     <div class="use-case-panel appear" data-use-case="msp-management">
                         <div class="panel-header">
@@ -159,7 +173,7 @@
                     
                     <div class="use-case-panel appear" data-use-case="enterprise-compliance">
                         <div class="panel-header">
-                            <div class="use-case-icon">�</div>
+                            <div class="use-case-icon">📋</div>
                             <div class="quick-rating">★★★★⭐ 4.6</div>
                         </div>
                         <h4>Enterprise Compliance & Patch Management</h4>
@@ -185,7 +199,7 @@
                     
                     <div class="use-case-panel appear" data-use-case="policy-migration">
                         <div class="panel-header">
-                            <div class="use-case-icon">�</div>
+                            <div class="use-case-icon">🔄</div>
                             <div class="quick-rating">★★★★★ 4.9</div>
                         </div>
                         <h4>Policy Migration & Tenant Onboarding</h4>
@@ -198,7 +212,7 @@
                     
                     <div class="use-case-panel appear" data-use-case="cost-optimization">
                         <div class="panel-header">
-                            <div class="use-case-icon">�</div>
+                            <div class="use-case-icon">💰</div>
                             <div class="quick-rating">★★★★⭐ 4.7</div>
                         </div>
                         <h4>Application Cost Optimization</h4>
@@ -219,6 +233,89 @@
                         <div class="panel-actions">
                             <button class="demo-button" data-demo="service-desk-integration">🎮 View Demo</button>
                             <div class="panel-indicator" onclick="showUseCaseOverlay('service-desk-integration')">Click for deep analysis →</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Use Cases (Initially Hidden) -->
+            <div class="use-cases-dashboard hidden" id="business-use-cases" data-category="business">
+                <div class="use-cases-grid">
+                    <div class="use-case-panel appear" data-use-case="msp-client-onboarding">
+                        <div class="panel-header">
+                            <div class="use-case-icon">🚀</div>
+                            <div class="quick-rating">★★★★☆ 4.6</div>
+                        </div>
+                        <h4>MSP Client Onboarding</h4>
+                        <p class="use-case-preview">Streamline the onboarding process for new MSP clients with standardized Intune configurations and automated setup workflows</p>
+                        <div class="panel-actions">
+                            <button class="demo-button" data-demo="msp-client-onboarding">🎮 View Demo</button>
+                            <div class="panel-indicator" onclick="showUseCaseOverlay('msp-client-onboarding')">Click for deep analysis →</div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-panel appear" data-use-case="it-cost-optimization">
+                        <div class="panel-header">
+                            <div class="use-case-icon">💰</div>
+                            <div class="quick-rating">★★★★☆ 4.3</div>
+                        </div>
+                        <h4>IT Cost Optimization</h4>
+                        <p class="use-case-preview">Reduce IT overhead through automated compliance reporting and streamlined device management processes</p>
+                        <div class="panel-actions">
+                            <button class="demo-button" data-demo="it-cost-optimization">🎮 View Demo</button>
+                            <div class="panel-indicator" onclick="showUseCaseOverlay('it-cost-optimization')">Click for deep analysis →</div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-panel appear" data-use-case="risk-mitigation-security">
+                        <div class="panel-header">
+                            <div class="use-case-icon">🛡️</div>
+                            <div class="quick-rating">★★★★★ 4.8</div>
+                        </div>
+                        <h4>Risk Mitigation & Security</h4>
+                        <p class="use-case-preview">Minimize security risks with continuous compliance monitoring and automated remediation capabilities</p>
+                        <div class="panel-actions">
+                            <button class="demo-button" data-demo="risk-mitigation-security">🎮 View Demo</button>
+                            <div class="panel-indicator" onclick="showUseCaseOverlay('risk-mitigation-security')">Click for deep analysis →</div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-panel appear" data-use-case="vendor-consolidation">
+                        <div class="panel-header">
+                            <div class="use-case-icon">�</div>
+                            <div class="quick-rating">★★★★☆ 4.4</div>
+                        </div>
+                        <h4>Vendor Consolidation</h4>
+                        <p class="use-case-preview">Consolidate multiple IT management tools into a unified Intune-based solution for reduced complexity</p>
+                        <div class="panel-actions">
+                            <button class="demo-button" data-demo="vendor-consolidation">🎮 View Demo</button>
+                            <div class="panel-indicator" onclick="showUseCaseOverlay('vendor-consolidation')">Click for deep analysis →</div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-panel appear" data-use-case="scalable-growth">
+                        <div class="panel-header">
+                            <div class="use-case-icon">�</div>
+                            <div class="quick-rating">★★★★☆ 4.5</div>
+                        </div>
+                        <h4>Scalable Growth</h4>
+                        <p class="use-case-preview">Support business expansion with automation that scales device management from hundreds to thousands</p>
+                        <div class="panel-actions">
+                            <button class="demo-button" data-demo="scalable-growth">🎮 View Demo</button>
+                            <div class="panel-indicator" onclick="showUseCaseOverlay('scalable-growth')">Click for deep analysis →</div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-panel appear" data-use-case="client-satisfaction">
+                        <div class="panel-header">
+                            <div class="use-case-icon">�</div>
+                            <div class="quick-rating">★★★★☆ 4.7</div>
+                        </div>
+                        <h4>Client Satisfaction</h4>
+                        <p class="use-case-preview">Improve client satisfaction with proactive monitoring, faster issue resolution, and transparent reporting</p>
+                        <div class="panel-actions">
+                            <button class="demo-button" data-demo="client-satisfaction">🎮 View Demo</button>
+                            <div class="panel-indicator" onclick="showUseCaseOverlay('client-satisfaction')">Click for deep analysis →</div>
                         </div>
                     </div>
                 </div>
@@ -271,97 +368,6 @@
                             <div class="similar-products-grid" id="overlay-similar-products">
                                 <!-- Similar products will be populated by JavaScript -->
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Business Use Cases Section -->
-    <section id="business-use-cases" class="use-cases-section section-animate delay-2">
-        <div class="container">
-            <h2>Business Use Cases</h2>
-            <p class="section-subtitle" style="color: #000000 !important;">Real-world business scenarios where Eido delivers measurable value and ROI.</p>
-            
-            <div class="use-cases-dashboard">
-                <!-- Use Case Cards in Flexible Grid -->
-                <div class="use-cases-grid">
-                    <div class="use-case-panel appear" data-use-case="msp-client-onboarding">
-                        <div class="panel-header">
-                            <div class="use-case-icon">🚀</div>
-                            <div class="quick-rating">★★★★☆ 4.6</div>
-                        </div>
-                        <h4>MSP Client Onboarding</h4>
-                        <p class="use-case-preview">Streamline the onboarding process for new MSP clients with standardized Intune configurations and automated setup workflows</p>
-                        <div class="panel-actions">
-                            <button class="demo-button" data-demo="msp-client-onboarding">🎮 View Demo</button>
-                            <div class="panel-indicator" onclick="showUseCaseOverlay('msp-client-onboarding')">Click for deep analysis →</div>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-panel appear" data-use-case="it-cost-optimization">
-                        <div class="panel-header">
-                            <div class="use-case-icon">💰</div>
-                            <div class="quick-rating">★★★★☆ 4.3</div>
-                        </div>
-                        <h4>IT Cost Optimization</h4>
-                        <p class="use-case-preview">Reduce IT overhead through automated compliance reporting and streamlined device management processes</p>
-                        <div class="panel-actions">
-                            <button class="demo-button" data-demo="it-cost-optimization">🎮 View Demo</button>
-                            <div class="panel-indicator" onclick="showUseCaseOverlay('it-cost-optimization')">Click for deep analysis →</div>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-panel appear" data-use-case="risk-mitigation-security">
-                        <div class="panel-header">
-                            <div class="use-case-icon">🛡️</div>
-                            <div class="quick-rating">★★★★★ 4.8</div>
-                        </div>
-                        <h4>Risk Mitigation & Security</h4>
-                        <p class="use-case-preview">Minimize security risks with continuous compliance monitoring and automated remediation capabilities</p>
-                        <div class="panel-actions">
-                            <button class="demo-button" data-demo="risk-mitigation-security">🎮 View Demo</button>
-                            <div class="panel-indicator" onclick="showUseCaseOverlay('risk-mitigation-security')">Click for deep analysis →</div>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-panel appear" data-use-case="vendor-consolidation">
-                        <div class="panel-header">
-                            <div class="use-case-icon">🔄</div>
-                            <div class="quick-rating">★★★★☆ 4.4</div>
-                        </div>
-                        <h4>Vendor Consolidation</h4>
-                        <p class="use-case-preview">Consolidate multiple IT management tools into a unified Intune-based solution for reduced complexity</p>
-                        <div class="panel-actions">
-                            <button class="demo-button" data-demo="vendor-consolidation">🎮 View Demo</button>
-                            <div class="panel-indicator" onclick="showUseCaseOverlay('vendor-consolidation')">Click for deep analysis →</div>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-panel appear" data-use-case="scalable-growth">
-                        <div class="panel-header">
-                            <div class="use-case-icon">📈</div>
-                            <div class="quick-rating">★★★★☆ 4.5</div>
-                        </div>
-                        <h4>Scalable Growth</h4>
-                        <p class="use-case-preview">Support business expansion with automation that scales device management from hundreds to thousands</p>
-                        <div class="panel-actions">
-                            <button class="demo-button" data-demo="scalable-growth">🎮 View Demo</button>
-                            <div class="panel-indicator" onclick="showUseCaseOverlay('scalable-growth')">Click for deep analysis →</div>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-panel appear" data-use-case="client-satisfaction">
-                        <div class="panel-header">
-                            <div class="use-case-icon">😊</div>
-                            <div class="quick-rating">★★★★☆ 4.7</div>
-                        </div>
-                        <h4>Client Satisfaction</h4>
-                        <p class="use-case-preview">Improve client satisfaction with proactive monitoring, faster issue resolution, and transparent reporting</p>
-                        <div class="panel-actions">
-                            <button class="demo-button" data-demo="client-satisfaction">🎮 View Demo</button>
-                            <div class="panel-indicator" onclick="showUseCaseOverlay('client-satisfaction')">Click for deep analysis →</div>
                         </div>
                     </div>
                 </div>
